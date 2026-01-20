@@ -1,0 +1,6 @@
+name = "wdw-equivariance-demo"
+uuid = "dc4c4a31-6f0e-49a2-9501-9d3d1a8a1a3b"
+version = "0.1.0"
+
+[compat]
+julia = "1.10"
