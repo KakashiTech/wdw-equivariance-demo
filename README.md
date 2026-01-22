@@ -10,6 +10,20 @@ What this is not
 - Not the full WDW system. No claims about physics or grand theories.
 - No extra modules beyond what the demo needs.
 
+What this demo shows (quick)
+|           Stage |         Equivariance error |
+|---------------:|:----------------------------:|
+| Baseline       | ~0.0                         |
+| After break    | 4.444e-02                    |
+| After repair   | ~0.0                         |
+| Recovery ratio | ~2.00e+14 (rupture / recovered) |
+
+Notes:
+- Snapshot values shown to make results visible without execution.
+- For your run, see CSV output if provided.
+
+![Equivariance bar chart](docs/figs/equivariance_bar.png)
+
 Quickstart
 ```
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
