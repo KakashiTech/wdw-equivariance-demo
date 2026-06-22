@@ -9,7 +9,7 @@
 #   4 classes: 1, 2, 4, 8, 16 samples per class (no augmentation)
 #   Binary (2 classes, normal vs time-reversed): 1 sample total
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

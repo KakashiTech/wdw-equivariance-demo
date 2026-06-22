@@ -10,7 +10,7 @@
 #
 # We test both models on the same dataset with controlled training sizes.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

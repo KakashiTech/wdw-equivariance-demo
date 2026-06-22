@@ -4,7 +4,7 @@
 # 2. Dₙ-sensitivity: B_z(ω) changes under reflection
 # 3. Time-reversal pair discrimination
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Statistics, Printf, Random
 

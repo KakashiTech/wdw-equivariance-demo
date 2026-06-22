@@ -11,7 +11,7 @@
 # Additionally: Cₙ≠Dₙ detection with the same model — Dₙ accuracy drops to ~0%
 # because reflected signals have different bispectrum structure.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

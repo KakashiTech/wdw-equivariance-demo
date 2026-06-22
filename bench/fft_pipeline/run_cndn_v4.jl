@@ -3,7 +3,7 @@
 # Phase 1: Train Wc ONLY (A=I frozen) — can we learn from bispectrum?
 # Phase 2: Fine-tune A with low LR
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

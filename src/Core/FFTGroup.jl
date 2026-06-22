@@ -118,10 +118,10 @@ end
 #   2. Exact recovery via z_ω / A_ω → IFFT
 #   3. Cₙ≠Dₙ detection (bispectrum is Dₙ-sensitive even with symmetric A)
 
-struct CyclicFourierLayer{T}
+struct CyclicFourierLayer{T, AType <: AbstractVector{Complex{T}}, BType <: AbstractVector{T}}
     n::Int
-    A::Vector{Complex{T}}  # (n,) complex spectral weights
-    b::Vector{T}            # (n,) real biases
+    A::AType  # (n,) complex spectral weights
+    b::BType  # (n,) real biases
 end
 
 function CyclicFourierLayer(n::Int; seed=42)
@@ -181,10 +181,11 @@ end
 #   time-reversed partner). This creates the Cₙ≠Dₙ accuracy gap.
 
 function bispec_features(x::Vector{T}, layer::CyclicFourierLayer{T}) where T
+    n = layer.n
+    n < 2 && return zeros(T, 2 * n)
     if T <: Complex
         @warn "bispec_features assumes real-valued input; Complex input may produce incorrect features"
     end
-    n = layer.n
     x̂ = fft_dispatch(x)
     z = [layer.A[ω] * x̂[ω] for ω in 1:n]
     re = [real(z[ω] * z[2] * conj(z[mod(ω, n) + 1])) for ω in 1:n]
@@ -194,7 +195,9 @@ end
 
 # Dₙ-symmetrized bispectrum: A_ω → (A_ω + conj(A_{n-ω+2}))/2
 function bispec_features_dn(x::Vector{T}, layer::CyclicFourierLayer{T}) where T
-    n = layer.n; n2 = n ÷ 2
+    n = layer.n
+    n < 2 && return zeros(T, 2 * n)
+    n2 = n ÷ 2
     A_sym = Vector{Complex{T}}(undef, n)
     A_sym[1] = real(layer.A[1])
     for ω in 2:n2
@@ -213,6 +216,8 @@ end
 # Power spectrum provides Dₙ-invariant backbone (same under reflection).
 # Bispectrum provides Cₙ-invariant, Dₙ-sensitive signal.
 function combined_bispec_features(x::Vector{T}, layer::CyclicFourierLayer{T}) where T
+    n = layer.n
+    n < 2 && return zeros(T, 3 * n)
     if T <: Complex
         @warn "combined_bispec_features assumes real-valued input; Complex input may produce incorrect features"
     end
@@ -226,7 +231,9 @@ function combined_bispec_features(x::Vector{T}, layer::CyclicFourierLayer{T}) wh
 end
 
 function combined_bispec_features_dn(x::Vector{T}, layer::CyclicFourierLayer{T}) where T
-    n = layer.n; n2 = n ÷ 2
+    n = layer.n
+    n < 2 && return zeros(T, 3 * n)
+    n2 = n ÷ 2
     A_sym = Vector{Complex{T}}(undef, n)
     A_sym[1] = real(layer.A[1])
     for ω in 2:n2
@@ -270,6 +277,7 @@ end
 
 function combined_bispec_features_2d(x::Matrix{T}, layer::CyclicFourierLayer2D{T}) where T
     nx, ny = layer.nx, layer.ny
+    (nx < 2 || ny < 2) && return zeros(T, 3 * nx * ny)
     x̂ = fft_dispatch(x)
     # Power spectrum: |A[ω₁,ω₂]|² · |x̂[ω₁,ω₂]|² + b
     power_vec = [abs2(layer.A[i,j]) * abs2(x̂[i,j]) + layer.b[(i-1)*ny + j] for i in 1:nx, j in 1:ny]

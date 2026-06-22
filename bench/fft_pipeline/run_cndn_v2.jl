@@ -5,7 +5,7 @@
 #   2. Fine-tune: enable A + negative λ_asym + A norm, joint training
 #   3. Evaluate Cₙ vs Dₙ accuracy gap
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf
 

@@ -542,13 +542,14 @@ function find_generators_liesd(model::LieSD{T},
     
     for (s, J) in enumerate(jacobians)
         for i in 1:n, k in 1:n
+            row_base = (s - 1) * n * n + (i - 1) * n + k
             # Ecuación: [J·G - G·J]_{ik} = 0
             for j in 1:n
                 # Término J_{ij}·G_{jk}: contribuye a G_{jk} con coeficiente J_{ij}
                 # En notación vectorizada: posición n*(j-1) + k
                 col1 = n * (j - 1) + k
                 val1 = J[i, j]
-                push!(A_rows, T(s))
+                push!(A_rows, T(row_base))
                 push!(A_cols, col1)
                 push!(A_vals, val1)
                 
@@ -556,7 +557,7 @@ function find_generators_liesd(model::LieSD{T},
                 # En notación vectorizada: posición n*(i-1) + j
                 col2 = n * (i - 1) + j
                 val2 = -J[j, k]
-                push!(A_rows, T(s))
+                push!(A_rows, T(row_base))
                 push!(A_cols, col2)
                 push!(A_vals, val2)
             end

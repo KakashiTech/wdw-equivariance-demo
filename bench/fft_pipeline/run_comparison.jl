@@ -6,7 +6,7 @@
 # CNN: Needs shift augmentation (how many phases needed for 100%?)
 # MLP: Raw signals, various hidden sizes
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

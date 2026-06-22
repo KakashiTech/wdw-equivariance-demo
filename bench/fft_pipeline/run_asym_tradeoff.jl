@@ -2,7 +2,7 @@
 # Measure tradeoff between A asymmetry and Cₙ≠Dₙ gap
 # Start with A=I, train with various λ_asym, observe gap decay.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

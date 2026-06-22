@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 # Verify recovery and MDL ratio at n=512 scale
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Printf, Statistics
 

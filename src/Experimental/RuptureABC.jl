@@ -187,7 +187,7 @@ function test_ood_coherence(certifier::ABCCertifier,
             elseif dist_name == "uniform"
                 data = 2 * (rand(T, certifier.n) .- 0.5)
             elseif dist_name == "laplace"
-                data = [rand() < 0.5 ? log(2*rand()) : -log(2*rand()) for _ in 1:certifier.n]
+                data = [let u = rand(); u < 0.5 ? log(2*u) : -log(2*(1-u)) end for _ in 1:certifier.n]
             elseif dist_name == "cauchy"
                 data = tan.(π .* (rand(T, certifier.n) .- 0.5))
             else
@@ -281,7 +281,7 @@ function generate_rupture_certificate(certifier::ABCCertifier,
     return cert
 end
 
-now() = Dates.now()
 import Dates
+now() = Dates.now()
 
 end

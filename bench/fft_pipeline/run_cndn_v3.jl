@@ -7,7 +7,7 @@
 # This fixes the core issue: [Re(ẑ); Im(ẑ)] has zero mean under shifts.
 # Bispectrum has NON-ZERO mean and captures phase structure.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

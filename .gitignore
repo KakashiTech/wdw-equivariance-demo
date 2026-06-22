@@ -22,9 +22,8 @@ results/
 data/*ubyte
 data/*idx
 
-# Deprecated / not part of package
-/src/mlp_baseline.jl
-mlp_baseline.jl
+# Deprecated (tracked but not part of standard test suite)
+/src/Deprecated/mlp_baseline.jl
 
 # Extra test suites (not part of standard test)
 extras/

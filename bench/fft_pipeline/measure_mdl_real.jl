@@ -3,7 +3,7 @@
 # accuracy on the time-reversal task. Find minimum MLP hidden size h where
 # MLP accuracy >= WDW accuracy. Ratio = MLP_params / WDW_params.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 

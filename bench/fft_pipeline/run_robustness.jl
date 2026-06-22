@@ -4,7 +4,7 @@
 # Shows that the 100% accuracy @ 4 samples is NOT a fluke.
 # Tests across 50 random seeds with different signals each time.
 
-include("../../src/FFTGroup.jl")
+include("../../src/Core/FFTGroup.jl")
 using .FFTGroup
 using LinearAlgebra, Random, Statistics, Printf, Zygote
 
